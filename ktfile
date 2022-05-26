@@ -1,0 +1,132 @@
+
+
+
+Html
+
+
+Text
+ 
+
+Print
+  
+
+Delete
+  
+
+counter
+
+Shubham G <shubhamlaughs@gmail.com>
+
+Wednesday, May 25, 2022 3:42:24 PM
+
+
+package com.example.counter
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.os.CountDownTimer
+
+import kotlinx.android.synthetic.main.activity_main.*
+
+
+class MainActivity : AppCompatActivity() {
+    private val timer = MyCounter (10000000000,100)
+    var counterValue:Int=0
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        startBtn.setOnClickListener{
+            timer.start()
+            startBtn.isEnabled =false
+        }
+        stopBtn.setOnClickListener {
+            timer.cancel()
+            startBtn.isEnabled=true
+        }
+        reset.setOnClickListener{
+            counterValue = 0
+            viewNumber.text= (counterValue).toString()
+        }
+    }
+      inner class MyCounter(millisInFuture: Long, countDownInterval:Long): CountDownTimer(millisInFuture,countDownInterval) {
+        override fun onFinish(){
+
+        }
+            override fun onTick(millisUntilFinished:Long){
+                counterValue ++
+                viewNumber.text= (counterValue).toString()
+
+            }
+
+
+      }
+    }
+
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/startBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="89dp"
+        android:layout_marginTop="449dp"
+        android:layout_marginEnd="234dp"
+        android:layout_marginBottom="234dp"
+        android:text="Start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/stopBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="241dp"
+        android:layout_marginTop="453dp"
+        android:layout_marginEnd="82dp"
+        android:layout_marginBottom="230dp"
+        android:text="Stop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/viewNumber"
+        android:layout_width="200dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="118dp"
+        android:layout_marginTop="204dp"
+        android:layout_marginEnd="93dp"
+        android:layout_marginBottom="490dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="178dp"
+        android:layout_marginTop="546dp"
+        android:layout_marginEnd="145dp"
+        android:layout_marginBottom="137dp"
+        android:text="reset"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
